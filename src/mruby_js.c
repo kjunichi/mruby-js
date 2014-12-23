@@ -113,7 +113,7 @@ mrb_int mruby_js_get_string_len(mrb_state *mrb, mrb_value *argv, int idx)
   struct RString *s;
   /* This comes in pair with mruby_js_get_string_ptr, skip type check here */
   s = mrb_str_ptr(argv[idx]);
-  return s->len;
+  return RSTRING_LEN(argv[idx]);
 }
 
 char* mruby_js_get_string_ptr(mrb_state *mrb, mrb_value *argv, int idx)
@@ -122,8 +122,8 @@ char* mruby_js_get_string_ptr(mrb_state *mrb, mrb_value *argv, int idx)
   if (mrb_type(argv[idx]) != MRB_TT_STRING) {
     mrb_raise(mrb, E_ARGUMENT_ERROR, "Given argument is not a string!");
   }
-  s = mrb_str_ptr(argv[idx]);
-  return s->ptr;
+  //s = mrb_str_ptr(argv[idx]);
+  return RSTRING_PTR(argv[idx]);
 }
 
 mrb_int mruby_js_get_integer(mrb_state *mrb, mrb_value *argv, int idx)
